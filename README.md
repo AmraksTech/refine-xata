@@ -1,6 +1,6 @@
 # Xata Data Provider for Refine
 
-This README provides detailed information about using the Xata data provider with Refine. This custom data provider enables seamless integration of Xata's database services with the Refine framework.
+This custom data provider enables seamless integration of Xata's database services with the Refine framework.
 
 ## Prerequisites
 
@@ -18,30 +18,14 @@ Make sure you have `@refinedev/core` and `@xata.io/client` installed in your pro
 npm install @refinedev/core @xata.io/client
 ```
 
-## Usage
+## Setup
 
-You can now use the dataProvider with any Refine hooks that require data fetching, such as useList, useOne, useCreate, useUpdate, and useDelete. Below is an example of how to use useList to fetch data:
+Import and initialize the Xata client, then pass it to the data provider:
 
 ```typescript
-import { useList } from '@refinedev/core';
+import { getXataClient } from './xata'; // Adjust the path as necessary
+import { dataProvider as createDataProvider } from './path/to/dataProvider'; // Adjust the path as necessary
 
-const { data, isLoading, error } = useList({
-  resource: 'campaigns',
-  pagination: { current: 1, pageSize: 10 },
-  filters: [{ field: 'status', operator: 'eq', value: 'active' }],
-  sorters: [{ field: 'createdAt', order: 'desc' }],
-});
-
-if (isLoading) return <p>Loading...</p>;
-if (error) return <p>Error! {error.message}</p>;
-
-return (
-  <div>
-    {data.map((item) => (
-      <div key={item.id}>
-        <p>{item.name}</p>
-      </div>
-    ))}
-  </div>
-);
+const xataClient = getXataClient();
+const dataProvider = createDataProvider(xataClient);
 ```
