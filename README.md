@@ -2,6 +2,8 @@
 
 This custom data provider enables seamless integration of Xata's database services with the Refine framework.
 
+(IN PROGRESS ...)
+
 ## Prerequisites
 
 Before using this data provider, ensure you have:
